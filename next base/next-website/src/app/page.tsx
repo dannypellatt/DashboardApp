@@ -3,10 +3,11 @@
 import React, { useState }  from 'react';
 import Navbar from '@/app/components/Navbar/Navbar';
 import HeroSection from '@/app/components/HeroSection/HeroSection';
-import ProjectsSection from '@/app/components/Projects/Projects';
 import AboutMeSection from '@/app/components/AboutMe/AboutMe';
 import CertificationsSection from '@/app/components/Certifications/Certifications';
 import ContactSection from '@/app/components/Contact/Contact';
+import Projects from '@/app/components/Projects/Projects';
+
 
 const Home = () => {
   return (
@@ -20,7 +21,7 @@ const Home = () => {
           <AboutMeSection />
         </section>
         <section id="projects">
-          <ProjectsSection />
+          <Projects />
         </section>
         {/* <section id="certifications">
           <CertificationsSection />

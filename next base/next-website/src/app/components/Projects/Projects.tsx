@@ -1,160 +1,125 @@
-import React from 'react';
-import ProjectCard from './ProjectsCard';
+import { useState } from 'react';
 
-const projects = [
-    {
-      id: "project1",
-      imageSrc: "/project-imgs/epr.jpg",
-      title: "Enterprise Practice Report",
-      brief: "Online Directory",
-      description: "A subscription-based online database of major players in the pet health industry.",
-      longDescription: "I spearheaded the overhaul of the Enterprise Practice Report, evolving it from a static, error-prone PDF into a dynamic, subscription-based online database. By migrating to advanced software, establishing rigorous data integrity protocols, and completely redesigning the user interface, I created a seamless and visually appealing user experience. Leveraging cutting-edge technologies such as web-scraping and AI, I automated data collection and enrichment processes, ensuring up-to-date and accurate information. Additionally, I developed comprehensive company documentation, facilitating smooth operations and future scalability. The result was a highly profitable online resource, now serving over 50,000 subscribers and significantly enhancing their access to critical industry insights.",
-      softwareUsed: ["Airtable (database)", "Softr (UX/UI", "CodeChimp (analytics)", "ChatGPT (AI Chatbot)", "Clay (web scraping)", "Notion (team workspace)"],
-      outcomes: ["peeps loved it", "a lot"]
-    },
-    {
-      id: "project2",
-      imageSrc: "/project-imgs/dataco.jpg",
-      title: "DataCo",
-      brief: "Integration Platform",
-      description: "An integration and migration platform that uniformly presents data from any PIMS source.",
-      longDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti quis voluptatum dicta ab repellendus ullam explicabo, provident excepturi minus vitae ipsam inventore eaque, recusandae placeat autem architecto magni. Dolorem?",
-      softwareUsed: ["React", "Next.js"],
-      outcomes: ["peeps loved it", "a lot"]
-    },
-    {
-      id: "project3",
-      imageSrc: "/project-imgs/prism-mock.jpg",
-      title: "Prism",
-      brief: "Pricing Tool",
-      description: "A pricing scenario tool that allows retailers to predict revenue before adjusting stock prices.",
-      longDescription: "I was part of a small team within a software company creating a tool on behalf of large retail group, with a collection of outlets around the US. It allowed the business to adjust their pricing in different locations depending on local factors, as well as plan sales strategies, and track changes in holistic purchasing habits.",
-      softwareUsed: ["Airtable (database)", "Softr (UX/UI", "CodeChimp (analytics)", "ChatGPT (AI Chatbot)", "Clay (web scraping)", "Notion (team workspace)"],
-      outcomes: ["peeps loved it", "a lot"]
-    },
-    {
-      id: "project4",
-      imageSrc: "/project-imgs/petlog-temp.jpg",
-      title: "PetLog",
-      brief: "Health Tracker",
-      description: "A Proof of Concept app designed to track a pet's health through daily reports.",
-      longDescription: "I designed and built the PetLog app for a veterinary practice group interested in exploring its potential use. The app enables users to log various metrics about their pets to detect changes, aid recovery, and preempt illness. I utilized React's Next.js with Tailwind CSS for the front end, connecting to a Postgres database by leveraging React Server Components, achieving fast, dynamic rendering of CRUD operations. It also featured user authentication to support multiple accounts. The app was well received, with positive feedback from the veterinary practice group.",
-      softwareUsed: ["Airtable (database)", "Softr (UX/UI", "CodeChimp (analytics)", "ChatGPT (AI Chatbot)", "Clay (web scraping)", "Notion (team workspace)"],
-      outcomes: ["peeps loved it", "a lot"]
-    },
-    {
-      id: "project5",
-      imageSrc: "/project-imgs/tvcc.jpg",
-      title: "The Vintage Crockery Cupboard",
-      brief: "Bootstrap Website",
-      description: "A simple one page website for an event rental company in England. ",
-      longDescription: "",
-      softwareUsed: ["HTML/CSS", "Bootstrap", "", "", "", ""],
-      outcomes: ["peeps loved it", "a lot"]
-    },
-    {
-      id: "project6",
-      imageSrc: "/project-imgs/outlier.jpg",
-      title: "Outlier Advisors",
-      brief: "Weebly Website",
-      description: "A stylish and user-friendly business website created with Weebly, chosen for its intuitive drag-and-drop builder and easy customization, allowing administrator updates.",
-      longDescription: "",
-      softwareUsed: [""],
-      outcomes: [""]
-    },
-    {
-      id: "project7",
-      imageSrc: "/project-imgs/ngp.jpg",
-      title: "NGP Handyman",
-      brief: "HTML/CSS Website",
-      description: "A fully responsive and accessible handyman's business website, made with older users in mind.",
-      longDescription: "",
-      softwareUsed: [""],
-      outcomes: [""]
-    },
-  ];
+const tabs = [
+  {
+    id: 1,
+    imageSrc: '/project-imgs/epr.jpg',
+    altText: 'Tab 1',
+    title: "Enterprise Practice Report",
+    description: "A subscription-based online database of major players in the pet health industry.",
+    longDescription: "I led the transformation of the Enterprise Practice Report into a dynamic, subscription-based online database. By migrating to advanced software, establishing data integrity protocols, and redesigning the user interface, I created a seamless user experience. Utilizing web-scraping and AI, I automated data collection and enrichment, ensuring accurate information. This project resulted in a profitable resource with over 50,000 subscribers, providing enhanced industry insights.",
+    outcomes: "",
+    brief: "Online Directory",
+    tools: ["Airtable", "Softr", "CodeChimp", "Clay", "Notion", "ChatGPT"],
+  },
+  {
+    id: 2,
+    imageSrc: '/project-imgs/dataco.jpg',
+    altText: 'Tab 2',
+    title: "DataCo",
+    description: "An integration and migration platform that uniformly presents data from any PIMS source.",
+    longDescription: "A .NET application that collects information reports from various veterinary practice's with different management software, and converts it into uniform data. Making the most of data sharding, cloud storage, and no UI to maximise transfer speeds. Partners gain real-time insights into the status of connected practices, known issues, and all communications, with the ability to instantly onboard and self-install practices if desired.",
+    brief: "Integration Platform",
+    tools: [".NET", "C#", "MySQL", "Angular", "Git", "Kubernetes", "Azure Cloud Services", "Azure Pipelines", "Entity Framework"],
+  },
+  {
+    id: 3,
+    imageSrc: '/project-imgs/outlier.jpg',
+    altText: 'Tab 4',
+    title: "Outlier Advisors",
+    description: "An easily editable website for a consultancy company in the pet health industry",
+    longDescription: "I was hired to design, create, and launch a business website. The owner of the company's first priority was being able to edit the website herself, at a moment's notice. I chose Weebly for it's ease of use for non-technical users, as well as it's design and cost. I used plugins in order to achieve specific needs, such as a LinkedIn feed directly within the site.",
+    brief: "Weebly Website",
+    tools: ["Weebly", "Wireframing", "Canva", "Graphic Design", "Best Fit for Client", "Social Media Integration", ],
+  },
+  {
+    id: 4,
+    imageSrc: '/project-imgs/tvcc.jpg',
+    altText: 'Tab 5',
+    title: "The Vintage Crockery Cupboard",
+    description: "A one-page website for a party rental company, meant to generate customer inquiries",
+    longDescription: "This client needed a fully responsive website with SEO in mind. It had to conform to exisiting design guidelines, enhancing the brand. The main purpose was to allow customers to find and easily reach the business.",
+    brief: "Bootstrap Website",
+    tools: ["HTML", "CSS", "JavaScript", "Bootstrap", "Canva", "Netlify", ],
+  },
+  {
+    id: 5,
+    imageSrc: '/project-imgs/petlog-temp.jpg',
+    altText: 'Tab 6',
+    title: "PetLog",
+    description: "A Proof of Concept app designed to track a pet's health through daily reports.",
+    longDescription: "I designed and built the PetLog app for a veterinary practice group interested in exploring its potential use. The app enables users to log various metrics about their pets to detect changes, aid recovery, and preempt illness. I utilized React's Next.js with Tailwind CSS for the front end, connecting to a Postgres database by leveraging React Server Components, achieving fast, dynamic rendering of CRUD operations. It also featured user authentication to support multiple accounts.",
+    brief: "Pet Health App",
+    tools: ["HTML", "CSS", "React", "Next.js", "Tailwind CSS", "Server Components", "Postgres Database", "Vercel", "OAuth"],
+  },
+  {
+    id: 6,
+    imageSrc: '/project-imgs/prism-mock.jpg',
+    altText: 'Tab 3',
+    title: "Prism",
+    description: "A pricing scenario tool that allows retailers to predict revenue before adjusting stock prices.",
+    longDescription: "I was part of a small team within a software company creating a tool on behalf of large retail group, with a collection of outlets around the US. It allowed the business to adjust their pricing in different locations depending on local factors, as well as plan sales strategies, and track changes in holistic purchasing habits.",
+    brief: "Pricing Tool",
+    tools: [".NET", "C#", "MySQL", "Blazor", "MudBlazor", "Git", ],
+  },
+];
 
-const Project: React.FC = () => {
+const Projects = () => {
+  const [activeTab, setActiveTab] = useState(1);
+  const activeTabData = tabs.find((tab) => tab.id === activeTab);
+
   return (
-    
-    <div className="bg-base-100 w-full pb-16">
-
-            <div role="tablist" className="tabs tabs-lifted border border-red">
-                <input type="radio" name="my_tabs_3" role="tab" className="tab" aria-label="Development" defaultChecked={true}/>
-                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
-                <div className="bg-white rounded-xl p-4 w-full">
-                    <div className="carousel w-full transitionEnter={false}" >
-                        {projects.map((project) => (
-                            <ProjectCard
-                            key={project.id}
-                            id={project.id}
-                            imageSrc={project.imageSrc}
-                            title={project.title}
-                            description={project.description}
-                            longDescription={project.longDescription}
-                            softwareUsed={project.softwareUsed}
-                            outcomes={project.outcomes}
-                            />
-                        ))}
-                    </div>        
+    <div className="relative w-full p-0 mb-4 bg-base-100">
+      <div className="overflow-x-auto hide-scrollbar w-full relative">
+        <div className="flex justify-start xl:justify-center space-x-2 w-full">
+          {tabs.map((tab) => (
+            <div key={tab.id} className="flex flex-col items-center flex-shrink-0">
+              {/* Option Card */}
+              <div className='cursor-pointer' onClick={() => setActiveTab(tab.id)}>
+                <img
+                  src={tab.imageSrc}
+                  alt={tab.altText}
+                  className={`w-40 h-24 sm:w-60 sm:h-30 ${activeTab === tab.id ? '' : ''}`}
+                />
+                <p className="mt-4 text-center font-semibold">{tab.brief}</p>
               </div>
-                </div>
-
-                <input type="radio" name="my_tabs_3" role="tab" className="tab" aria-label="DevOps"/>
-                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
-                    <ul>
-                        <li className="mb-4"><strong>Practices: </strong>Restful APIs, authentication and authorization (OAuth, JWT), continuous integration/continuous deployment (CI/CD), debugging (Chrome DevTools, Visual Studio Debugger), unit testing (nUnit, Postman)</li>
-                        <li className=""><strong>Architecture: </strong> Microservices, Cloud services (AWS, Azure), Containerization (Docker, Kubernetes)</li>
-                    </ul>
-                </div>
-
-                <input type="radio" name="my_tabs_3" role="tab" className="tab" aria-label="Processes" />
-                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
-                    <div>
-                        <ul>
-                            <li className=""><strong>Practices: </strong>Agile methodologies, Scrum, Kanban, CI/CD, sprint planning & retrospectives, roadmapping, prioritization, user stories, OKRs</li>
-                        </ul>
-                    </div>
-                </div>
             </div>
-
-
-      
-        <div className='ml-36 pt-16 pb-8'>
-            <h1 className='text-3xl md:text-5xl font-semibold'>Projects I've worked on.</h1>
+          ))}
         </div>
-        <div className='px-16 py-8'>
-            
-            <div className='flex justify-center gap-8 '>
-                            {projects.map((project) => (
-                                <a key={project.id} href={`#${project.id}`} className="text-center hover:text-gray-500">
-                                <img src={project.imageSrc} alt={project.title} className="w-full h-auto object-cover rounded hover:border-gray-500" />
-                                <p className="font-semibold pt-4">{project.brief}</p>
-                                </a>
-                            ))}
-                        </div>    
+      </div>
+      <div className="mt-8 p-4">
+        {/* In Depth Project Card */}
+        <div className="card w-full rounded-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+          <div className='p-8 bg-base-300 rounded-xl order-2 md:order-1'>
+            <div>
+              <h2 className="card-title text-2xl md:text-4xl font-semibold pb-4">{activeTabData?.title}</h2>
             </div>
-            <div className="flex justify-center items-center">
-                <div className="bg-white rounded-xl p-4 w-full">
-                    <div className="carousel w-full transitionEnter={false}" >
-                        {projects.map((project) => (
-                            <ProjectCard
-                            key={project.id}
-                            id={project.id}
-                            imageSrc={project.imageSrc}
-                            title={project.title}
-                            description={project.description}
-                            longDescription={project.longDescription}
-                            softwareUsed={project.softwareUsed}
-                            outcomes={project.outcomes}
-                            />
-                        ))}
-                    </div>        
-              </div>
+            <div>
+              <p className="text-xl md:text-2xl font-normal">{activeTabData?.description}</p>
+            </div>
+            <div>
+              <p className="pt-8">{activeTabData?.longDescription}</p>
+            </div>
+          </div>
+
+          <div className="m-4 justify-center order-1 md:order-2">
+            {activeTabData && (
+              <img
+                src={activeTabData.imageSrc}
+                alt={activeTabData.altText}
+                className="w-full h-auto"
+              />
+            )}
+            <div className="m-4 flex flex-wrap justify-center md:justify-center">
+              {activeTabData?.tools && activeTabData.tools.map((tool, index) => (
+                <span key={index} className="badge badge-neutral m-1">{tool}</span>
+              ))}
+            </div>
+          </div>
         </div>
-      
+      </div>
     </div>
   );
 };
 
-export default Project;
+export default Projects;
